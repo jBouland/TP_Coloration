@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class Noeud {
     
     private int color;
+    private int Dsat;
     private ArrayList<Noeud> voisins;
 
     public int getColor() {
@@ -40,9 +41,20 @@ public class Noeud {
         }
         return false;
     }
+
+    public int getDsat() {
+        return Dsat;
+    }
+
+    public void setDsat(int Dsat) {
+        this.Dsat = Dsat;
+    }
+    
     
     
     public Noeud(){
+        color = 0;
+        Dsat = 0;
         voisins = new ArrayList<Noeud>();
     }
     

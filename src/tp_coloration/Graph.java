@@ -3,6 +3,7 @@ package tp_coloration;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  *
@@ -56,14 +57,95 @@ public class Graph {
 
     public void Dsatur() {
         //sortByDegree()
-        int color = 0;
+        Collections.sort(noeuds, new CustomComparator());
+        int coloredNodes = 0;
+        int color = 1;
+        int maxColor = 0;
         noeuds.get(0).setColor(color);
+        while (coloredNodes != noeuds.size() - 1) {
+            Noeud currentNode = chooseHigherDsat();
+            colorNodeWithMinColor(currentNode);
+            if (noeuds.contains(currentNode)) {
+                System.out.println("Noeud " + noeuds.indexOf(currentNode) + " coloré avec la couleur " + currentNode.getColor());
+            } else {
+                System.out.println("NOEUD NON EXISTANT TU LAS DANS LE CUL");
+            }
+            if (maxColor < currentNode.getColor()) {
+                maxColor = currentNode.getColor();
+            }
+            coloredNodes++;
+        }
+        System.out.println("COULEUR MAX UTILISE : " + maxColor);
 
     }
 
-    public void Dsat() {
-        for (int i = 0; i < noeuds.size(); i++) {
+    public void colorNodeWithMinColor(Noeud n) {
+        ArrayList<Noeud> voisins = n.getVoisins();
+        ArrayList colors = new ArrayList();
+        for (int i = 0; i < voisins.size(); i++) {
+            if (voisins.get(i).getColor() != 0 && !colors.contains(voisins.get(i).getColor())) {
+                colors.add(voisins.get(i).getColor());
+            }
+        }
+        for (int i = 1; i < colors.size(); i++) {
+            if (!colors.contains(i)) {
+                n.setColor(i);
+                System.out.println("COULEUR :" + i);
+                return;
+            }
+        }
+        n.setColor(colors.size() + 1);
 
+    }
+
+    private Noeud chooseHigherDsat() {
+        int maxDsat = -1;
+        ArrayList<Noeud> bestNodes = new ArrayList<Noeud>();
+        for (int i = 0; i < noeuds.size(); i++) {
+            if (noeuds.get(i).getColor() == 0) {
+                if (maxDsat < noeuds.get(i).getDsat()) {
+                    bestNodes.clear();
+                    maxDsat = noeuds.get(i).getDsat();
+                    bestNodes.add(noeuds.get(i));
+                } else if (maxDsat == noeuds.get(i).getDsat()) {
+                    bestNodes.add(noeuds.get(i));
+                }
+            }
+        }
+
+        if (bestNodes.size() != 0) {
+
+            int maxColor = 0;
+            Noeud finalNode = bestNodes.get(0);
+            for (int i = 0; i < bestNodes.size(); i++) {
+                if (maxColor < bestNodes.get(i).getColor()) {
+                    maxColor = bestNodes.get(i).getColor();
+                    finalNode = bestNodes.get(i);
+                }
+            }
+            return finalNode;
+        }
+        else{
+            return null;
+        }
+    }
+
+    public void Dsat(Noeud n) {
+        int color = n.getColor();
+
+        ArrayList<Noeud> voisins = n.getVoisins();
+        for (int i = 0; i < voisins.size(); i++) {
+            ArrayList<Noeud> voisins_2 = voisins.get(i).getVoisins();
+            Boolean incDsat = true;
+            for (int j = 0; j < voisins_2.size(); j++) {
+                if (voisins_2.get(j).getColor() == color) {
+                    incDsat = false;
+                    break;
+                }
+            }
+            if (incDsat) {
+                voisins.get(i).setDsat(voisins.get(i).getDsat() + 1);
+            }
         }
     }
 

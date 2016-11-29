@@ -20,6 +20,7 @@ public class TP_Coloration {
         
         Graph g = new Graph();
         g.setNoeuds(ImportEngine.importFile("C:\\Users\\Epulapp\\Downloads\\queen13_13.txt"));
+        g.Dsatur();
         
     }
     
