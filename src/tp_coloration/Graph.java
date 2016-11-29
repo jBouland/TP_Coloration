@@ -24,7 +24,7 @@ public class Graph {
         @Override
         public int compare(Noeud o1, Noeud o2) {
             //Return sens inverse
-            return Integer.compare(o2.listeVoisins.size(), o1.listeVoisins.size());
+            return Integer.compare(o2.getVoisins().size(), o1.getVoisins().size());
         }
     }
     
@@ -32,7 +32,6 @@ public class Graph {
     * @return le nombre de couleur sur le graphe via la méthode Welsh Powell
     */
     public int welshPowell(){
-        int numberOfColor = 0;
         int color = 0;
         Noeud noeud;
         //Sort : 
@@ -44,9 +43,17 @@ public class Graph {
         
         while(noeudsCopy.size()>0){
            noeud =  noeudsCopy.remove(0);
-           noeud.color = color;
-           
+           noeud.setColor(color);
+           for(int i=0; i<noeudsCopy.size(); i++){
+               Noeud n2 = noeudsCopy.get(i);
+               if(!n2.aVoisinsWithColor(color)){
+                   n2.setColor(color);
+                   noeudsCopy.remove(n2);
+                   i--;
+               }
+           }
+           color++;
         }
-        return numberOfColor;
+        return color+1;
     }
 }

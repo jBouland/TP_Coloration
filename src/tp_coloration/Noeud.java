@@ -13,14 +13,14 @@ import java.util.ArrayList;
  */
 public class Noeud {
     
-    private String color;
+    private int color;
     private ArrayList<Noeud> voisins;
 
-    public String getColor() {
+    public int getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(int color) {
         this.color = color;
     }
 
@@ -30,6 +30,15 @@ public class Noeud {
 
     public void setVoisins(ArrayList<Noeud> voisins) {
         this.voisins = voisins;
+    }
+    
+    public boolean aVoisinsWithColor(int color){
+        for(int i=0; i<voisins.size(); i++){
+            if(voisins.get(i).getColor() == color){
+                return true;
+            }
+        }
+        return false;
     }
     
     
