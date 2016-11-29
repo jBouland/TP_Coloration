@@ -5,6 +5,8 @@
  */
 package tp_coloration;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Epulapp
@@ -15,7 +17,10 @@ public class TP_Coloration {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        Graph g = new Graph();
+        g.setNoeuds(ImportEngine.importFile("C:\\Users\\Epulapp\\Downloads\\queen13_13.txt"));
+        
     }
     
 }
