@@ -6,6 +6,8 @@
 package tp_coloration;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  *
@@ -39,6 +41,22 @@ public class Noeud {
             }
         }
         return false;
+    }
+    
+    public int premiereCouleurDispo(){
+        int color = 1;
+        ArrayList<Integer> array = new ArrayList();
+        for(int i=0; i<voisins.size(); i++){
+            if(!array.contains(voisins.get(i).getColor())){
+                array.add(voisins.get(i).getColor());
+            }
+        }
+        while(true){
+            if(!array.contains(color)){
+                return color;
+            }
+            color++;
+        }
     }
     
     

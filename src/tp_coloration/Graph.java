@@ -15,8 +15,24 @@ public class Graph {
     public Graph() {
         noeuds = null;
     }
+    
+    public void raz(){
+        //remove color
+        for(int i=0; i< noeuds.size(); i++){
+            noeuds.get(i).setColor(0);
+        }
+    }
 
-    public class CustomComparator implements Comparator<Noeud> {
+    public class CustomComparatorAsc implements Comparator<Noeud> {
+
+        @Override
+        public int compare(Noeud o1, Noeud o2) {
+           //Return sens inverse
+           return Integer.compare(o1.getVoisins().size(), o2.getVoisins().size());
+        }
+    }
+    
+    public class CustomComparatorDesc implements Comparator<Noeud> {
 
         @Override
         public int compare(Noeud o1, Noeud o2) {
@@ -28,11 +44,20 @@ public class Graph {
     /*
      * @return le nombre de couleur sur le graphe via la méthode Welsh Powell
      */
-    public int welshPowell() {
-        int color = 0;
+    public int welshPowell(String comparator) {
+        int color = 1;
         Noeud noeud;
         //Sort : 
-        Collections.sort(noeuds, new CustomComparator());
+        switch(comparator){
+            case "ASC":
+                Collections.sort(noeuds, new CustomComparatorAsc());
+                break;
+            case "DESC":
+                Collections.sort(noeuds, new CustomComparatorDesc());
+                break;
+            default:
+                break;
+        }
         ArrayList<Noeud> noeudsCopy = new ArrayList();
         for (int i = 0; i < noeuds.size(); i++) {
             noeudsCopy.add(noeuds.get(i));
@@ -51,7 +76,7 @@ public class Graph {
             }
             color++;
         }
-        return color + 1;
+        return color;
     }
 
     public void Dsatur() {
@@ -65,6 +90,18 @@ public class Graph {
         for (int i = 0; i < noeuds.size(); i++) {
 
         }
+    }
+    
+    public int greedy(){
+        int maxCol = 0;
+        for(int i =0; i<noeuds.size(); i++){
+            Noeud n =noeuds.get(i);
+            n.setColor(n.premiereCouleurDispo());
+            if(maxCol < n.getColor()){
+                maxCol = n.getColor();
+            }
+        }
+        return maxCol;
     }
 
     public ArrayList<Noeud> getNoeuds() {
