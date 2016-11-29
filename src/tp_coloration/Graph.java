@@ -22,4 +22,19 @@ public class Graph {
     public void setNoeuds(ArrayList<Noeud> noeuds) {
         this.noeuds = noeuds;
     }
+    
+    
+    public void Dsatur(){
+        //sortByDegree()
+        int color = 0;
+        noeuds.get(0).setColor(color);
+        
+    }
+    
+    public void Dsat(){
+        for(int i = 0; i < noeuds.size(); i++){
+            
+        }
+    }
+   
 }
