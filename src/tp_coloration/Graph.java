@@ -11,16 +11,15 @@ import java.util.List;
  */
 public class Graph {
 
-    
     public ArrayList<Noeud> noeuds;
 
     public Graph() {
         noeuds = null;
     }
-    
-    public void raz(){
+
+    public void raz() {
         //remove color
-        for(int i=0; i< noeuds.size(); i++){
+        for (int i = 0; i < noeuds.size(); i++) {
             noeuds.get(i).setColor(0);
         }
     }
@@ -29,11 +28,11 @@ public class Graph {
 
         @Override
         public int compare(Noeud o1, Noeud o2) {
-           //Return sens inverse
-           return Integer.compare(o1.getVoisins().size(), o2.getVoisins().size());
+            //Return sens inverse
+            return Integer.compare(o1.getVoisins().size(), o2.getVoisins().size());
         }
     }
-    
+
     public class CustomComparatorDesc implements Comparator<Noeud> {
 
         @Override
@@ -49,20 +48,22 @@ public class Graph {
     public int welshPowell(String comparator) {
         int color = 1;
         Noeud noeud;
-        //Sort : 
-        switch(comparator){
-            case "ASC":
-                Collections.sort(noeuds, new CustomComparatorAsc());
-                break;
-            case "DESC":
-                Collections.sort(noeuds, new CustomComparatorDesc());
-                break;
-            default:
-                break;
-        }
         ArrayList<Noeud> noeudsCopy = new ArrayList();
         for (int i = 0; i < noeuds.size(); i++) {
             noeudsCopy.add(noeuds.get(i));
+        }
+        //Sort : 
+        switch (comparator) {
+            case "ASC":
+                Collections.sort(noeudsCopy, new CustomComparatorAsc());
+                break;
+            case "DESC":
+                Collections.sort(noeudsCopy, new CustomComparatorDesc());
+                break;
+            case "RANDOM":
+                Collections.shuffle(noeudsCopy);
+            default:
+                break;
         }
 
         while (noeudsCopy.size() > 0) {
@@ -144,8 +145,7 @@ public class Graph {
                 }
             }
             return finalNode;
-        }
-        else{
+        } else {
             return null;
         }
     }
@@ -176,18 +176,37 @@ public class Graph {
     public void setNoeuds(ArrayList<Noeud> noeuds) {
         this.noeuds = noeuds;
     }
-    
-    public int greedy(){
+
+    public int greedy(String order) {
+
+        ArrayList<Noeud> noeudsCopy = new ArrayList();
+        for (int i = 0; i < noeuds.size(); i++) {
+            noeudsCopy.add(noeuds.get(i));
+        }
+        //Sort : 
+        switch (order) {
+            case "ASC":
+                Collections.sort(noeudsCopy, new CustomComparatorAsc());
+                break;
+            case "DESC":
+                Collections.sort(noeudsCopy, new CustomComparatorDesc());
+                break;
+            case "RANDOM":
+                Collections.shuffle(noeudsCopy);
+                break;
+            default:
+                break;
+        }
+
         int maxCol = 0;
-        for(int i =0; i<noeuds.size(); i++){
-            Noeud n =noeuds.get(i);
+        for (int i = 0; i < noeudsCopy.size(); i++) {
+            Noeud n = noeudsCopy.get(i);
             n.setColor(n.premiereCouleurDispo());
-            if(maxCol < n.getColor()){
+            if (maxCol < n.getColor()) {
                 maxCol = n.getColor();
             }
         }
         return maxCol;
     }
-    
 
 }
