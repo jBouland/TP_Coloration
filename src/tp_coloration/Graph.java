@@ -5,10 +5,21 @@
  */
 package tp_coloration;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Epulapp
  */
 public class Graph {
     
+    private ArrayList<Noeud> noeuds;
+
+    public ArrayList<Noeud> getNoeuds() {
+        return noeuds;
+    }
+
+    public void setNoeuds(ArrayList<Noeud> noeuds) {
+        this.noeuds = noeuds;
+    }
 }

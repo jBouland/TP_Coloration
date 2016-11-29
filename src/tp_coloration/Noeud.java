@@ -5,10 +5,42 @@
  */
 package tp_coloration;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Epulapp
  */
 public class Noeud {
+    
+    private String color;
+    private ArrayList<Noeud> voisins;
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public ArrayList<Noeud> getVoisins() {
+        return voisins;
+    }
+
+    public void setVoisins(ArrayList<Noeud> voisins) {
+        this.voisins = voisins;
+    }
+    
+    
+    public Noeud(){
+        voisins = new ArrayList<Noeud>();
+    }
+    
+    public void addVoisin(Noeud n){
+        voisins.add(n);
+    }
+    
+    
     
 }
