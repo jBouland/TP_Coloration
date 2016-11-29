@@ -91,17 +91,12 @@ public class Graph {
         while (coloredNodes != noeuds.size() - 1) {
             Noeud currentNode = chooseHigherDsat();
             colorNodeWithMinColor(currentNode);
-            if (noeuds.contains(currentNode)) {
-                System.out.println("Noeud " + noeuds.indexOf(currentNode) + " coloré avec la couleur " + currentNode.getColor());
-            } else {
-                System.out.println("NOEUD NON EXISTANT TU LAS DANS LE CUL");
-            }
             if (maxColor < currentNode.getColor()) {
                 maxColor = currentNode.getColor();
             }
             coloredNodes++;
         }
-        System.out.println("COULEUR MAX UTILISE : " + maxColor);
+        System.out.println("DSATUR : " + maxColor + " couleurs");
 
     }
 
@@ -116,7 +111,6 @@ public class Graph {
         for (int i = 1; i < colors.size(); i++) {
             if (!colors.contains(i)) {
                 n.setColor(i);
-                System.out.println("COULEUR :" + i);
                 return;
             }
         }

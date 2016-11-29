@@ -37,6 +37,8 @@ public class TP_Coloration {
         g.raz();
         col = g.greedy();
         System.out.println("Greedy : " + col + " couleurs");
+        g.raz();
+        g.Dsatur();
          System.out.println("");
          
         //GRAPH 7
@@ -56,6 +58,8 @@ public class TP_Coloration {
         g.raz();
         col = g.greedy();
         System.out.println("Greedy : " + col + " couleurs");
+        g.raz();
+        g.Dsatur();
          System.out.println("");
          
         //GRAPH 9
@@ -75,6 +79,8 @@ public class TP_Coloration {
         g.raz();
         col = g.greedy();
         System.out.println("Greedy : " + col + " couleurs");
+        g.raz();
+        g.Dsatur();
          System.out.println("");
          
         //GRAPH 11
@@ -94,7 +100,9 @@ public class TP_Coloration {
         g.raz();
         col = g.greedy();
         System.out.println("Greedy : " + col + " couleurs");
-         System.out.println("");
+        g.raz();
+        g.Dsatur();
+        System.out.println("");
          
         //GRAPH 13
         g = new Graph();
@@ -113,7 +121,8 @@ public class TP_Coloration {
         g.raz();
         col = g.greedy();
         System.out.println("Greedy : " + col + " couleurs");
-        
+        g.raz();
+        g.Dsatur();
         System.out.println("");
         //GRAPH 15
         g = new Graph();
@@ -132,6 +141,8 @@ public class TP_Coloration {
         g.raz();
         col = g.greedy();
         System.out.println("Greedy : " + col + " couleurs");
+        g.raz();
+        g.Dsatur();
         
     }
     
